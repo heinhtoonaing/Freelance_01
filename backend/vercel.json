@@ -1,0 +1,23 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/server.js"
+      }
+    ],
+    "env": {
+      "CLOUDINARY_CLOUD_NAME": "donesejf4",
+      "CLOUDINARY_API_KEY": "966919733499885",
+      "CLOUDINARY_API_SECRET": "_DXGEUbhZULtdHtICbvJAx701WU",
+      "MONGO_URI": "mongodb+srv://wad542:Heinhein2025@cluster0.ba5cy.mongodb.net/mongodbVSCodePlaygroundDB?retryWrites=true&w=majority",
+      "FRONTEND_URL": "http://localhost:5173"
+    }
+  }
+  
