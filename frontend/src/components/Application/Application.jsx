@@ -35,7 +35,7 @@ const Application = () => {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/api/v1/application/post",  // Updated port number
+        "https://freelance-01-api.vercel.app/",  // Updated port number
         formData,
         {
           withCredentials: true,
