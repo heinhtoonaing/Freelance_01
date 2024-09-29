@@ -6,10 +6,8 @@ class ErrorHandler extends Error {
 }
 
 export const errorMiddleware = (err, req, res, next) => {
-  // Ensure err is an instance of Error
-  if (!(err instanceof Error)) {
-    err = new Error(err); // Convert string to Error if necessary
-  }
+  // Log the error for debugging
+  console.error(err); 
 
   // Set default values for message and statusCode
   err.message = err.message || "Internal Server Error";
@@ -18,7 +16,7 @@ export const errorMiddleware = (err, req, res, next) => {
   // Handle specific error types
   if (err.name === "CastError") {
     const message = `Resource not found. Invalid ${err.path}`;
-    err = new ErrorHandler(message, 400); // Create new ErrorHandler instance
+    err = new ErrorHandler(message, 400);
   } else if (err.code === 11000) {
     const message = `Duplicate ${Object.keys(err.keyValue)} entered`;
     err = new ErrorHandler(message, 400);
@@ -34,8 +32,8 @@ export const errorMiddleware = (err, req, res, next) => {
   return res.status(err.statusCode).json({
     success: false,
     message: err.message,
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack }), // Include stack trace in development
   });
 };
-
 
 export default ErrorHandler;
